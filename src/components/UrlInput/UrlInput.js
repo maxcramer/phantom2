@@ -23,6 +23,7 @@ function UrlInput() {
           name="url"
           type="url"
           placeholder="enter url"
+          value={url}
           className="form-control"
           onChange={(e) => setUrl(e.target.value)}
         />
