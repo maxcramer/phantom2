@@ -31,6 +31,32 @@ function UrlInput() {
       <div>
         <button onClick={addUrl}>Submit</button>
       </div>
+      <div>
+        <ul>
+          {urls.map((url) => (
+            // <React.Fragment key={url.id}>{url.title}</React.Fragment>
+            <li className="url_item" key={url.id}>
+              <a href={url.title}>{url.title}</a>
+              <div className="validation_delete">
+                <img
+                  className="image"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/2048px-Eo_circle_green_checkmark.svg.png"
+                  alt="Validated URL"
+                  title="Validated"
+                />
+                <button
+                  type="button"
+                  id="delete-item_btn"
+                  title="Delete Item"
+                  //   onClick={() => handleDelete(url.id)}
+                >
+                  X
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
