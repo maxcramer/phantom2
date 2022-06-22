@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function UrlInput() {
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.getItem("localUrls")) {
+      const storedList = JSON.parse(localStorage.getItem("localUrls"));
+      setUrls(storedList);
+    }
+  }, [setUrls]);
 
   const addUrl = (e) => {
     if (url) {
@@ -15,6 +22,18 @@ function UrlInput() {
       setUrl("");
     }
   };
+
+  const handleDelete = () => {
+    const deleted = urls.filter((u) => u.id !== url.id);
+    setUrls(deleted);
+    localStorage.setItem("localUrls", JSON.stringify(deleted));
+  };
+
+  const handleClear = () => {
+    setUrls([]);
+    localStorage.removeItem("localUrls");
+  };
+
   return (
     <div>
       <h1>Url Checker</h1>
@@ -34,7 +53,6 @@ function UrlInput() {
       <div>
         <ul>
           {urls.map((url) => (
-            // <React.Fragment key={url.id}>{url.title}</React.Fragment>
             <li className="url_item" key={url.id}>
               <a href={url.title}>{url.title}</a>
               <div className="validation_delete">
@@ -48,7 +66,7 @@ function UrlInput() {
                   type="button"
                   id="delete-item_btn"
                   title="Delete Item"
-                  //   onClick={() => handleDelete(url.id)}
+                  onClick={() => handleDelete(url.id)}
                 >
                   X
                 </button>
@@ -57,6 +75,11 @@ function UrlInput() {
           ))}
         </ul>
       </div>
+      {!urls.length ? null : (
+        <div>
+          <button onClick={() => handleClear()}>Clear All</button>
+        </div>
+      )}
     </div>
   );
 }
