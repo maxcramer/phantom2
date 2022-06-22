@@ -23,10 +23,9 @@ function UrlInput() {
     }
   };
 
-  const handleDelete = (id) => {
-    const deleted = urls.filter((u) => u.id !== id);
+  const handleDelete = (urls) => {
+    const deleted = urls.filter((u) => u.id !== url.id);
     setUrls(deleted);
-    console.log(urls);
     localStorage.setItem("localUrls", JSON.stringify(deleted));
     console.log("running");
   };
