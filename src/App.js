@@ -1,11 +1,11 @@
 import "./App.css";
 
-import urlList from "./";
+import UrlList from "./components/urlList/UrlList";
 
 function App() {
   return (
     <div className="App">
-      <urlList />
+      <UrlList />
     </div>
   );
 }
