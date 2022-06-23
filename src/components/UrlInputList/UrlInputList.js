@@ -1,37 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 
 import "./UrlInputList.css";
 
-function UrlInput({ handleDelete, onSubmit, handleClear, url, setUrl, urls }) {
-  console.log("inside UrlInputList urls: ", urls);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
+function UrlInputList({ handleDelete, handleClear, urls }) {
   return (
     <React.Fragment>
-      <section>
-        <h1>Url Checker</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <input
-              name="url"
-              type="url"
-              placeholder="enter url"
-              value={url}
-              className="form-control"
-              onChange={(e) => setUrl(e.target.value)}
-            />
-          </div>
-          <div>
-            <input type="submit" value="Submit" />
-          </div>
-        </form>
-      </section>
       <section>
         <div>
           <ul>
@@ -68,4 +41,4 @@ function UrlInput({ handleDelete, onSubmit, handleClear, url, setUrl, urls }) {
   );
 }
 
-export default UrlInput;
+export default UrlInputList;

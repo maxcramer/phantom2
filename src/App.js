@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 import "./App.css";
-import UrlInput from "./components/UrlInputList/UrlInputList";
+import UrlInputList from "./components/UrlInputList/UrlInputList";
+import UrlInput from "./components/UrlInput/UrlInput";
 
 function App() {
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(20);
+
   useEffect(() => {
-    console.log("running");
     if (localStorage.getItem("localUrls")) {
+      setLoading(true);
       const storedList = JSON.parse(localStorage.getItem("localUrls"));
       setUrls(storedList);
+      setLoading(false);
     }
   }, [setUrls]);
 
@@ -40,16 +46,12 @@ function App() {
     setUrls([]);
     localStorage.removeItem("localUrls");
   };
-  console.log("last line before return statement urls: ", urls);
   return (
     <div className="App">
-      {/* <UrlInput  /> */}
-      <UrlInput
+      <UrlInput onSubmit={onSubmit} url={url} setUrl={setUrl} />
+      <UrlInputList
         handleDelete={handleDelete}
-        onSubmit={onSubmit}
         handleClear={handleClear}
-        url={url}
-        setUrl={setUrl}
         urls={urls}
       />
     </div>
