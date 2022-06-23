@@ -57,23 +57,11 @@ function UrlInput() {
               value={url}
               className="form-control"
               onChange={(e) => setUrl(e.target.value)}
-              //   {...register("url", {
-              //     required: {
-              //       value: true,
-              //       message: "Url is required",
-              //     },
-              //     // pattern: {
-              //     //   value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
-              //     //   message: "Please enter a valid URL",
-              //     // },
-              //   })}
             />
           </div>
           <div>
             <input type="submit" value="Submit" />
-            {/* <button onClick={addUrl}>Submit</button> */}
           </div>
-          {/* {errors.url && <span>{errors.url.message}</span>} */}
         </form>
       </section>
       <section>
