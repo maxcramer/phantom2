@@ -26,7 +26,9 @@ function UrlInput({ onSubmit, setUrl, url }) {
             id="input"
             onChange={(e) => setUrl(e.target.value)}
           />
-          <input type="submit" value="Submit" className="submit_btn" />
+          <button id="pushable2" type="submit">
+            <span id="front2">Submit</span>
+          </button>
         </form>
       </section>
     </React.Fragment>

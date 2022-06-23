@@ -23,41 +23,38 @@ form {
     top: 100px;
 }
 
-.submit_btn {
-    width: 175px;
-    height: 75px;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
-    background-color: #16CC00;
-    color: white;
-    border: 1px solid white;
-    align-items: center;
-    margin: 10px;
-    border-bottom: 5px solid #13AD00;
-    border-right: 5px solid #13AD00;
-    position: absolute;
-    top: 180px;
-    cursor: pointer;
-}
+ #pushable2 {
+     background: hsl(95, 60%, 42%);
+     border-radius: 12px;
+     border: none;
+     padding: 0;
+     cursor: pointer;
+     outline-offset: 4px;
+     top: 110px;
+     position: relative
+ }
 
-.submit_btn:active {
-    border-top: 5px solid #13AD00;
-    border-left: 5px solid #13AD00;
-    border-bottom: 0;
-    border-right: 0;
-}
+ #front2 {
+     display: block;
+     padding: 12px 42px;
+     border-radius: 12px;
+     font-size: 1.25rem;
+     background: hsl(95, 85%, 50%);
+     color: white;
+     transform: translateY(-6px);
+ }
 
-
+ #pushable2:active #front2 {
+     transform: translateY(-2px);
+ }
 @media only screen and (max-width: 600px) {
     form {
         width: 85%;
     }
 
-    .submit_btn {
+    /* .submit_btn {
         width: 50%;
-    }
+    } */
 
     .text_input {
         width: 60%;

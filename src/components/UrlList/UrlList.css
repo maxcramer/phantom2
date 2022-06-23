@@ -67,16 +67,6 @@ a:hover {
     text-decoration: underline;
 }
 
-@media only screen and (max-width: 600px) {
-    .url_item {
-        width: 85%;
-    }
-
-    .validation_delete {
-        width: 25%;
-    }
-}
-
 #clear-all_btn {
     width: 175px;
     height: auto;
@@ -122,4 +112,14 @@ a:hover {
 
 #pushable:active #front {
     transform: translateY(-2px);
+}
+
+@media only screen and (max-width: 600px) {
+    .url_item {
+        width: 85%;
+    }
+
+    .validation_delete {
+        width: 25%;
+    }
 }
