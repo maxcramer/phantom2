@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./UrlList.css";
 
 function UrlInputList({ handleDelete, handleClear, urls, loading }) {
+  // if no Urls loaded show "Loading..."
   if (loading) {
     return <h2>Loading...</h2>;
   }
