@@ -1,0 +1,26 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.page_number {
+    padding: 20px 10px 35px;
+    font-size: 20px;
+}
+
+#page_number_item {
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#page_number_item:hover {
+    color: #5A0380;
+    text-decoration: underline;
+
+}

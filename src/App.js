@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import UrlList from "./components/UrlList/UrlList";
 import UrlInput from "./components/UrlInput/UrlInput";
+import Pagination from "./components/Pagination/Pagination";
 
 function App() {
   const [url, setUrl] = useState("");
@@ -47,10 +48,11 @@ function App() {
     localStorage.removeItem("localUrls");
   };
 
+  // Get current URLS
   const indexOfLastUrl = currentPage * urlsPerPage;
   const indexOfFirstUrl = indexOfLastUrl - urlsPerPage;
   const currentUrls = urls.slice(indexOfFirstUrl, indexOfLastUrl);
-
+  console.log(urls.length);
   return (
     <div className="App">
       <UrlInput onSubmit={onSubmit} url={url} setUrl={setUrl} />
@@ -60,6 +62,7 @@ function App() {
         urls={currentUrls}
         loading={loading}
       />
+      <Pagination urlsPerPage={urlsPerPage} totalUrls={urls.length} />
     </div>
   );
 }
