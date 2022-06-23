@@ -1,48 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-function UrlInput() {
-  const [url, setUrl] = useState("");
-  const [urls, setUrls] = useState([]);
+import "./UrlInputList.css";
+
+function UrlInput({ handleDelete, onSubmit, handleClear, url, setUrl, urls }) {
+  console.log("inside UrlInputList urls: ", urls);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-
-  useEffect(() => {
-    if (localStorage.getItem("localUrls")) {
-      const storedList = JSON.parse(localStorage.getItem("localUrls"));
-      setUrls(storedList);
-    }
-  }, [setUrls]);
-
-  const onSubmit = (e) => {
-    console.log("Running onSubmit");
-    if (url) {
-      const newUrl = {
-        id: new Date().getTime().toString(),
-        title: url,
-      };
-      setUrls([...urls, newUrl]);
-      localStorage.setItem("localUrls", JSON.stringify([...urls, newUrl]));
-      setUrl("");
-    }
-  };
-
-  const handleDelete = (url) => {
-    const deleted = urls.filter((u) => u.id !== url.id);
-    console.log("deleted: ", deleted);
-    setUrls(deleted);
-    localStorage.setItem("localUrls", JSON.stringify(deleted));
-    console.log("running");
-  };
-
-  const handleClear = () => {
-    setUrls([]);
-    localStorage.removeItem("localUrls");
-  };
 
   return (
     <React.Fragment>

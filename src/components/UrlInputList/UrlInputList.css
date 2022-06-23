@@ -1,0 +1,78 @@
+li {
+    list-style: none;
+}
+
+ul {
+    padding-left: 0;
+}
+
+.url_item {
+    border: 1px solid grey;
+    border-radius: 4px;
+    width: 575px;
+    height: 25px;
+    margin: 10px auto;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 5px 5px 4px grey;
+}
+
+.url_item a {
+    color: black;
+    text-decoration: none;
+}
+
+
+.validation_delete {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+}
+
+#delete-item_btn {
+    cursor: pointer;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 11px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #BE0000;
+    border-right: 2px solid #BE0000;
+}
+
+#delete-item_btn:active {
+    border-top: 2px solid #BE0000;
+    border-left: 2px solid #BE0000;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+.image {
+    height: 40px;
+    float: right;
+    right: 0;
+}
+
+a:hover {
+    color: darkblue;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+    .url_item {
+        width: 85%;
+    }
+
+    .validation_delete {
+        width: 25%;
+    }
+}
