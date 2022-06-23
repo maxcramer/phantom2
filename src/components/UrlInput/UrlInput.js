@@ -5,11 +5,14 @@ function UrlInput() {
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]);
   const {
-    register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onTouched",
+    defaultValues: {
+      url: "https://www.",
+    },
+  });
 
   useEffect(() => {
     if (localStorage.getItem("localUrls")) {
@@ -54,14 +57,14 @@ function UrlInput() {
               type="url"
               placeholder="enter url"
               value={url}
-              className="form-control"
+              //   className="form-control"
               onChange={(e) => setUrl(e.target.value)}
             />
           </div>
           <div>
             <input type="submit" value="Submit" />
-            {/* <button onClick={addUrl}>Submit</button> */}
           </div>
+          {errors.url && <span>{errors.url.message}</span>}
         </form>
       </section>
       <section>
