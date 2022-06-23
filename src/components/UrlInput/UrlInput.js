@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
+import "./UrlInput.css";
+
 function UrlInput({ onSubmit, setUrl, url }) {
   const {
     register,
@@ -12,21 +14,19 @@ function UrlInput({ onSubmit, setUrl, url }) {
   return (
     <React.Fragment>
       <section>
-        <h1>Url Checker</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <input
-              name="url"
-              type="url"
-              placeholder="enter url"
-              value={url}
-              className="form-control"
-              onChange={(e) => setUrl(e.target.value)}
-            />
-          </div>
-          <div>
-            <input type="submit" value="Submit" />
-          </div>
+          <h1>Url Checker</h1>
+
+          <input
+            name="url"
+            type="url"
+            placeholder="enter url"
+            value={url}
+            className="text_input"
+            id="input"
+            onChange={(e) => setUrl(e.target.value)}
+          />
+          <input type="submit" value="Submit" className="submit_btn" />
         </form>
       </section>
     </React.Fragment>
