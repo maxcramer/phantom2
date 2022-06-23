@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "./App.css";
-import UrlInputList from "./components/UrlInputList/UrlInputList";
+import UrlList from "./components/UrlList/UrlList";
 import UrlInput from "./components/UrlInput/UrlInput";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
 
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(20);
+  const [urlsPerPage, setUrlsPerPage] = useState(5);
 
   useEffect(() => {
     if (localStorage.getItem("localUrls")) {
@@ -46,13 +46,19 @@ function App() {
     setUrls([]);
     localStorage.removeItem("localUrls");
   };
+
+  const indexOfLastUrl = currentPage * urlsPerPage;
+  const indexOfFirstUrl = indexOfLastUrl - urlsPerPage;
+  const currentUrls = urls.slice(indexOfFirstUrl, indexOfLastUrl);
+
   return (
     <div className="App">
       <UrlInput onSubmit={onSubmit} url={url} setUrl={setUrl} />
-      <UrlInputList
+      <UrlList
         handleDelete={handleDelete}
         handleClear={handleClear}
-        urls={urls}
+        urls={currentUrls}
+        loading={loading}
       />
     </div>
   );

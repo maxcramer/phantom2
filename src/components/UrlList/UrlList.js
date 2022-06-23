@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import "./UrlInputList.css";
+import "./UrlList.css";
 
-function UrlInputList({ handleDelete, handleClear, urls }) {
+function UrlInputList({ handleDelete, handleClear, urls, loading }) {
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
   return (
     <React.Fragment>
       <section>
