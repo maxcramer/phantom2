@@ -3,8 +3,10 @@ import React from "react";
 import "./Pagination.css";
 
 const Pagination = ({ urlsPerPage, totalUrls, paginate }) => {
+  // Start as empty array
   const pageNumbers = [];
 
+  // loop through number of urls to work out how many pages need to be created
   for (let i = 1; i <= Math.ceil(totalUrls / urlsPerPage); i++) {
     pageNumbers.push(i);
   }
