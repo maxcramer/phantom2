@@ -36,7 +36,9 @@ function UrlInputList({ handleDelete, handleClear, urls, loading }) {
         </div>
         {!urls.length ? null : (
           <div>
-            <button onClick={() => handleClear()}>Clear All</button>
+            <button id="clear-all_btn" onClick={() => handleClear()}>
+              Clear All
+            </button>
           </div>
         )}
       </section>
