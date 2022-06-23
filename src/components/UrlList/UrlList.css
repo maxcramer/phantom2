@@ -67,30 +67,6 @@ a:hover {
     text-decoration: underline;
 }
 
-#clear-all_btn {
-    width: 175px;
-    height: auto;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
-    background-color: red;
-    color: white;
-    border: 1px solid white;
-    align-items: center;
-    margin: 10px;
-    border-bottom: 5px solid #BE0000;
-    border-right: 5px solid #BE0000;
-    cursor: pointer;
-}
-
-#clear-all_btn:active {
-    border-top: 5px solid #BE0000;
-    border-left: 5px solid #BE0000;
-    border-bottom: 0;
-    border-right: 0;
-}
-
 #pushable {
     background: hsl(0, 100%, 30%);    
     border-radius: 12px;
