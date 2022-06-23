@@ -1,13 +1,10 @@
 import "./App.css";
-import UrlInput from "./components/UrlInput/UrlInput";
-
-import UrlList from "./components/UrlList/UrlList";
+import UrlInput from "./components/UrlInputList/UrlInputList";
 
 function App() {
   return (
     <div className="App">
       <UrlInput />
-      {/* <UrlList /> */}
     </div>
   );
 }
