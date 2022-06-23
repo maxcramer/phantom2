@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 function UrlInput() {
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     if (localStorage.getItem("localUrls")) {
@@ -11,7 +18,8 @@ function UrlInput() {
     }
   }, [setUrls]);
 
-  const addUrl = (e) => {
+  const onSubmit = (e) => {
+    console.log("Running onSubmit");
     if (url) {
       const newUrl = {
         id: new Date().getTime().toString(),
@@ -36,52 +44,59 @@ function UrlInput() {
   };
 
   return (
-    <div>
-      <h1>Url Checker</h1>
-      <div>
-        <input
-          name="url"
-          type="url"
-          placeholder="enter url"
-          value={url}
-          className="form-control"
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </div>
-      <div>
-        <button onClick={addUrl}>Submit</button>
-      </div>
-      <div>
-        <ul>
-          {urls.map((url) => (
-            <li className="url_item" key={url.id}>
-              <a href={url.title}>{url.title}</a>
-              <div className="validation_delete">
-                <img
-                  className="image"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/2048px-Eo_circle_green_checkmark.svg.png"
-                  alt="Validated URL"
-                  title="Validated"
-                />
-                <button
-                  type="button"
-                  id="delete-item_btn"
-                  title="Delete Item"
-                  onClick={() => handleDelete(url.id)}
-                >
-                  X
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {!urls.length ? null : (
+    <React.Fragment>
+      <section>
+        <h1>Url Checker</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <input
+              name="url"
+              type="url"
+              placeholder="enter url"
+              value={url}
+              className="form-control"
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </div>
+          <div>
+            <input type="submit" value="Submit" />
+            {/* <button onClick={addUrl}>Submit</button> */}
+          </div>
+        </form>
+      </section>
+      <section>
         <div>
-          <button onClick={() => handleClear()}>Clear All</button>
+          <ul>
+            {urls.map((url) => (
+              <li className="url_item" key={url.id}>
+                <a href={url.title}>{url.title}</a>
+                <div className="validation_delete">
+                  <img
+                    className="image"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/2048px-Eo_circle_green_checkmark.svg.png"
+                    alt="Validated URL"
+                    title="Validated"
+                  />
+                  <button
+                    type="button"
+                    id="delete-item_btn"
+                    title="Delete Item"
+                    onClick={() => handleDelete(url.id)}
+                  >
+                    X
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
-    </div>
+        {!urls.length ? null : (
+          <div>
+            <button onClick={() => handleClear()}>Clear All</button>
+          </div>
+        )}
+      </section>
+    </React.Fragment>
   );
 }
 
