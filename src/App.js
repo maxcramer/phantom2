@@ -6,13 +6,16 @@ import UrlInput from "./components/UrlInput/UrlInput";
 import Pagination from "./components/Pagination/Pagination";
 
 function App() {
+  // Setting up Urls array
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]);
 
+  // Setting up for Pagination
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [urlsPerPage, setUrlsPerPage] = useState(20);
 
+  // Check for items in local storage
   useEffect(() => {
     if (localStorage.getItem("localUrls")) {
       setLoading(true);
@@ -22,6 +25,7 @@ function App() {
     }
   }, [setUrls]);
 
+  // Submit input value
   const onSubmit = (e) => {
     if (url) {
       const newUrl = {
@@ -34,22 +38,25 @@ function App() {
     }
   };
 
+  // Delete a single Url
   const handleDelete = (url) => {
     const deleted = urls.filter((u) => u.id !== url.id);
     setUrls(deleted);
     localStorage.setItem("localUrls", JSON.stringify(deleted));
   };
 
+  // Clear all Urls
   const handleClear = () => {
     setUrls([]);
     localStorage.removeItem("localUrls");
   };
 
-  // Get current URLS
+  // Work out current number of Urls per page for pagination
   const indexOfLastUrl = currentPage * urlsPerPage;
   const indexOfFirstUrl = indexOfLastUrl - urlsPerPage;
   const currentUrls = urls.slice(indexOfFirstUrl, indexOfLastUrl);
 
+  // set Pagination numbers
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
