@@ -5,14 +5,11 @@ function UrlInput() {
   const [url, setUrl] = useState("");
   const [urls, setUrls] = useState([]);
   const {
+    register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm({
-    mode: "onTouched",
-    defaultValues: {
-      url: "https://www.",
-    },
-  });
+  } = useForm();
 
   useEffect(() => {
     if (localStorage.getItem("localUrls")) {
@@ -34,8 +31,9 @@ function UrlInput() {
     }
   };
 
-  const handleDelete = (urls) => {
+  const handleDelete = (url) => {
     const deleted = urls.filter((u) => u.id !== url.id);
+    console.log("deleted: ", deleted);
     setUrls(deleted);
     localStorage.setItem("localUrls", JSON.stringify(deleted));
     console.log("running");
@@ -57,14 +55,25 @@ function UrlInput() {
               type="url"
               placeholder="enter url"
               value={url}
-              //   className="form-control"
+              className="form-control"
               onChange={(e) => setUrl(e.target.value)}
+              //   {...register("url", {
+              //     required: {
+              //       value: true,
+              //       message: "Url is required",
+              //     },
+              //     // pattern: {
+              //     //   value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+              //     //   message: "Please enter a valid URL",
+              //     // },
+              //   })}
             />
           </div>
           <div>
             <input type="submit" value="Submit" />
+            {/* <button onClick={addUrl}>Submit</button> */}
           </div>
-          {errors.url && <span>{errors.url.message}</span>}
+          {/* {errors.url && <span>{errors.url.message}</span>} */}
         </form>
       </section>
       <section>
@@ -84,7 +93,7 @@ function UrlInput() {
                     type="button"
                     id="delete-item_btn"
                     title="Delete Item"
-                    onClick={() => handleDelete(url.id)}
+                    onClick={() => handleDelete(url)}
                   >
                     X
                   </button>
