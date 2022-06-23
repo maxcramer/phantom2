@@ -49,12 +49,6 @@ form {
     border-right: 0;
 }
 
-span {
-    color: red;
-    position: absolute;
-    top: 95px;
-    font-weight: bold;
-}
 
 @media only screen and (max-width: 600px) {
     form {
