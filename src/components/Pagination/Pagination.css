@@ -1,4 +1,4 @@
-nav {
+.paginate_parent {
     display: flex;
     flex-direction: row;
     align-items: center;

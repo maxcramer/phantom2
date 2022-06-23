@@ -11,7 +11,7 @@ function App() {
 
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [urlsPerPage, setUrlsPerPage] = useState(5);
+  const [urlsPerPage, setUrlsPerPage] = useState(20);
 
   useEffect(() => {
     if (localStorage.getItem("localUrls")) {
@@ -23,7 +23,6 @@ function App() {
   }, [setUrls]);
 
   const onSubmit = (e) => {
-    console.log("Running onSubmit");
     if (url) {
       const newUrl = {
         id: new Date().getTime().toString(),
@@ -37,10 +36,8 @@ function App() {
 
   const handleDelete = (url) => {
     const deleted = urls.filter((u) => u.id !== url.id);
-    console.log("deleted: ", deleted);
     setUrls(deleted);
     localStorage.setItem("localUrls", JSON.stringify(deleted));
-    console.log("running");
   };
 
   const handleClear = () => {
@@ -52,7 +49,9 @@ function App() {
   const indexOfLastUrl = currentPage * urlsPerPage;
   const indexOfFirstUrl = indexOfLastUrl - urlsPerPage;
   const currentUrls = urls.slice(indexOfFirstUrl, indexOfLastUrl);
-  console.log(urls.length);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="App">
       <UrlInput onSubmit={onSubmit} url={url} setUrl={setUrl} />
@@ -62,7 +61,11 @@ function App() {
         urls={currentUrls}
         loading={loading}
       />
-      <Pagination urlsPerPage={urlsPerPage} totalUrls={urls.length} />
+      <Pagination
+        urlsPerPage={urlsPerPage}
+        totalUrls={urls.length}
+        paginate={paginate}
+      />
     </div>
   );
 }
