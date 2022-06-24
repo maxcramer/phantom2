@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import "./UrlInput.css";
 
 function UrlInput({ onSubmit, setUrl, url }) {
-  // reeact-hook-form
   const {
+    register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -15,6 +16,7 @@ function UrlInput({ onSubmit, setUrl, url }) {
       <section>
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>Url Checker</h1>
+
           <input
             name="url"
             type="url"

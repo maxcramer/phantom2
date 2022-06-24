@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 import "./App.css";
 import UrlList from "./components/UrlList/UrlList";
-import UrlInput from "./components/UrlInput/UrlInput";
+// import UrlInput from "./components/UrlInput/UrlInput";
 import Pagination from "./components/Pagination/Pagination";
 
 function App() {
@@ -15,6 +16,13 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [urlsPerPage, setUrlsPerPage] = useState(20);
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ mode: "onTouched", defaultValues: { url: "http://www." } });
+
   // Check for items in local storage
   useEffect(() => {
     if (localStorage.getItem("localUrls")) {
@@ -25,7 +33,6 @@ function App() {
     }
   }, [setUrls]);
 
-  // Submit input value
   const onSubmit = (e) => {
     if (url) {
       const newUrl = {
@@ -61,7 +68,27 @@ function App() {
 
   return (
     <div className="App">
-      <UrlInput onSubmit={onSubmit} url={url} setUrl={setUrl} />
+      {/* <UrlInput url={url} setUrl={setUrl} onSubmit={onSubmit} /> */}
+      <React.Fragment>
+        <section>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <h1>Url Checker Testing</h1>
+
+            <input
+              name="url"
+              type="url"
+              placeholder="enter url"
+              value={url}
+              className="text_input"
+              id="input"
+              onChange={(e) => setUrl(e.target.value)}
+            />
+            <button id="pushable2" type="submit">
+              <span id="front2">Submit</span>
+            </button>
+          </form>
+        </section>
+      </React.Fragment>
       <UrlList
         handleDelete={handleDelete}
         handleClear={handleClear}
