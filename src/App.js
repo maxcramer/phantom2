@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 
 import "./App.css";
 import UrlList from "./components/UrlList/UrlList";
-// import UrlInput from "./components/UrlInput/UrlInput";
 import Pagination from "./components/Pagination/Pagination";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({ mode: "onTouched", defaultValues: { url: "http://www." } });
 
@@ -30,17 +28,16 @@ function App() {
       setLoading(true);
       const storedList = JSON.parse(localStorage.getItem("localUrls"));
       setUrls(storedList);
-      console.log(storedList);
       setLoading(false);
     }
   }, [setUrls]);
 
+  // Submit a Url
   const onSubmit = ({ url, e }) => {
     const newUrl = {
       id: new Date().getTime().toString(),
       title: url,
     };
-    console.log("New Url: ", newUrl);
     setUrls([...urls, newUrl]);
     localStorage.setItem("localUrls", JSON.stringify([...urls, newUrl]));
     setUrl("");
@@ -69,7 +66,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <UrlInput url={url} setUrl={setUrl} onSubmit={onSubmit} /> */}
       <React.Fragment>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
