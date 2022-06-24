@@ -97,7 +97,9 @@ function App() {
                   />
                 </div>
                 <div>
-                  <input type="submit" value="Submit" />
+                  <button id="pushable2" type="submit">
+                    <span id="front2">Submit</span>
+                  </button>
                 </div>
                 <div>{errors.url && <span>{errors.url.message}</span>}</div>
               </div>
