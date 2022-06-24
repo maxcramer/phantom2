@@ -76,35 +76,27 @@ function App() {
             <div>
               <h2>Validate Url Input</h2>
             </div>
+            <input
+              name="url"
+              id="input"
+              className="text_input"
+              type="url"
+              onChange={(e) => setUrl(e.target.value)}
+              {...register("url", {
+                // URL VALIDATION
+                required: { value: true, message: "URL is Required" },
+                pattern: {
+                  value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                  message: "Please enter a valid URL",
+                },
+              })}
+            />
             <div>
-              <div>
-                <div>
-                  <input
-                    name="url"
-                    id="input"
-                    className="text_input"
-                    type="url"
-                    onChange={(e) => setUrl(e.target.value)}
-                    {...register("url", {
-                      // URL VALIDATION
-                      required: { value: true, message: "URL is Required" },
-                      pattern: {
-                        value:
-                          /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
-                        message: "Please enter a valid URL",
-                      },
-                    })}
-                  />
-                </div>
-                <div>
-                  <button id="pushable2" type="submit">
-                    <span id="front2">Submit</span>
-                  </button>
-                </div>
-                <div>{errors.url && <span>{errors.url.message}</span>}</div>
-              </div>
+              <button id="pushable2" type="submit">
+                <span id="front2">Submit</span>
+              </button>
             </div>
-            {/* Submit button */}
+            <div>{errors.url && <span>{errors.url.message}</span>}</div>
           </div>
         </form>
       </React.Fragment>
