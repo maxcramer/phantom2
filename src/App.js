@@ -16,6 +16,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [urlsPerPage, setUrlsPerPage] = useState(20);
 
+  // setting up event handler
   const {
     register,
     handleSubmit,
@@ -34,15 +35,13 @@ function App() {
   }, [setUrls]);
 
   const onSubmit = (e) => {
-    if (url) {
-      const newUrl = {
-        id: new Date().getTime().toString(),
-        title: url,
-      };
-      setUrls([...urls, newUrl]);
-      localStorage.setItem("localUrls", JSON.stringify([...urls, newUrl]));
-      setUrl("");
-    }
+    const newUrl = {
+      id: new Date().getTime().toString(),
+      title: url,
+    };
+    setUrls([...urls, newUrl]);
+    localStorage.setItem("localUrls", JSON.stringify([...urls, newUrl]));
+    setUrl("");
   };
 
   // Delete a single Url
@@ -70,24 +69,38 @@ function App() {
     <div className="App">
       {/* <UrlInput url={url} setUrl={setUrl} onSubmit={onSubmit} /> */}
       <React.Fragment>
-        <section>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h1>Url Checker Testing</h1>
-
-            <input
-              name="url"
-              type="url"
-              placeholder="enter url"
-              value={url}
-              className="text_input"
-              id="input"
-              onChange={(e) => setUrl(e.target.value)}
-            />
-            <button id="pushable2" type="submit">
-              <span id="front2">Submit</span>
-            </button>
-          </form>
-        </section>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <div>
+              <h2>Validate Url Input</h2>
+            </div>
+            <div>
+              <div>
+                <div>
+                  <input
+                    type="url"
+                    onChange={(e) => setUrl(e.target.value)}
+                    // value={url}
+                    {...register("url", {
+                      // URL VALIDATION
+                      required: { value: true, message: "URL is Required" },
+                      pattern: {
+                        value:
+                          /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                        message: "Please enter a valid URL",
+                      },
+                    })}
+                  />
+                </div>
+                <div>{errors.url && <span>{errors.url.message}</span>}</div>
+              </div>
+            </div>
+            {/* Submit button */}
+            <div>
+              <input type="submit" value="Submit" />
+            </div>
+          </div>
+        </form>
       </React.Fragment>
       <UrlList
         handleDelete={handleDelete}
