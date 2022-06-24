@@ -30,15 +30,17 @@ function App() {
       setLoading(true);
       const storedList = JSON.parse(localStorage.getItem("localUrls"));
       setUrls(storedList);
+      console.log(storedList);
       setLoading(false);
     }
   }, [setUrls]);
 
-  const onSubmit = (e) => {
+  const onSubmit = ({ url, e }) => {
     const newUrl = {
       id: new Date().getTime().toString(),
       title: url,
     };
+    console.log("New Url: ", newUrl);
     setUrls([...urls, newUrl]);
     localStorage.setItem("localUrls", JSON.stringify([...urls, newUrl]));
     setUrl("");
@@ -78,9 +80,11 @@ function App() {
               <div>
                 <div>
                   <input
+                    name="url"
+                    id="input"
+                    className="text_input"
                     type="url"
                     onChange={(e) => setUrl(e.target.value)}
-                    // value={url}
                     {...register("url", {
                       // URL VALIDATION
                       required: { value: true, message: "URL is Required" },
@@ -92,13 +96,13 @@ function App() {
                     })}
                   />
                 </div>
+                <div>
+                  <input type="submit" value="Submit" />
+                </div>
                 <div>{errors.url && <span>{errors.url.message}</span>}</div>
               </div>
             </div>
             {/* Submit button */}
-            <div>
-              <input type="submit" value="Submit" />
-            </div>
           </div>
         </form>
       </React.Fragment>
